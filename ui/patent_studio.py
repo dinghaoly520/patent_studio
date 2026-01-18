@@ -18,6 +18,21 @@ from datetime import datetime
 from typing import Optional, Dict, Any, List
 import traceback
 
+# 可选依赖 - 文件处理
+try:
+    import docx
+    HAS_DOCX = True
+except ImportError:
+    HAS_DOCX = False
+    docx = None
+
+try:
+    import PyPDF2
+    HAS_PDF = True
+except ImportError:
+    HAS_PDF = False
+    PyPDF2 = None
+
 # 添加父目录到路径
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -364,7 +379,9 @@ def parse_uploaded_file(uploaded_file) -> str:
             return clean_extracted_text(content)
 
         elif file_type in ["doc", "docx"]:
-            import docx
+            if not HAS_DOCX:
+                st.error("缺少 python-docx 模块，请安装: pip install python-docx")
+                return ""
             from io import BytesIO
 
             # 读取文件内容
@@ -387,7 +404,9 @@ def parse_uploaded_file(uploaded_file) -> str:
             return clean_extracted_text("\n".join(text_parts))
 
         elif file_type == "pdf":
-            import PyPDF2
+            if not HAS_PDF:
+                st.error("缺少 PyPDF2 模块，请安装: pip install PyPDF2")
+                return ""
             from io import BytesIO
 
             file_content = uploaded_file.getvalue()
