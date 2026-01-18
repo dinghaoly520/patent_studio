@@ -44,308 +44,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# 自定义 CSS - 现代化深色主题
-st.markdown("""
-<style>
-    /* 导入字体 */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    
-    /* 全局样式 */
-    .stApp {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    
-    /* 主标题 */
-    .hero-title {
-        font-size: 3rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-align: center;
-        margin-bottom: 0.5rem;
-        letter-spacing: -0.02em;
-    }
-    
-    .hero-subtitle {
-        text-align: center;
-        color: #6b7280;
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-    }
-    
-    /* 功能卡片 */
-    .feature-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-        border: 1px solid #e2e8f0;
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        border-color: #667eea;
-    }
-    
-    .feature-icon {
-        font-size: 2.5rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .feature-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 0.5rem;
-    }
-    
-    .feature-desc {
-        color: #64748b;
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
-    
-    /* 状态标签 */
-    .status-badge {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        border-radius: 9999px;
-        font-size: 0.75rem;
-        font-weight: 500;
-    }
-    
-    .status-success {
-        background: #dcfce7;
-        color: #166534;
-    }
-    
-    .status-warning {
-        background: #fef3c7;
-        color: #92400e;
-    }
-    
-    .status-error {
-        background: #fee2e2;
-        color: #991b1b;
-    }
-    
-    .status-info {
-        background: #dbeafe;
-        color: #1e40af;
-    }
-    
-    /* 进度条 */
-    .progress-container {
-        background: #e2e8f0;
-        border-radius: 9999px;
-        height: 8px;
-        overflow: hidden;
-        margin: 1rem 0;
-    }
-    
-    .progress-bar {
-        height: 100%;
-        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-        border-radius: 9999px;
-        transition: width 0.5s ease;
-    }
-    
-    /* 文件上传区域 */
-    .upload-zone {
-        border: 2px dashed #cbd5e1;
-        border-radius: 16px;
-        padding: 3rem 2rem;
-        text-align: center;
-        background: #f8fafc;
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-    
-    .upload-zone:hover {
-        border-color: #667eea;
-        background: #f1f5f9;
-    }
-    
-    /* 编辑区域 */
-    .editor-container {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-    }
-    
-    .editor-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid #e2e8f0;
-    }
-    
-    .editor-title {
-        font-weight: 600;
-        color: #1e293b;
-    }
-    
-    /* 润色按钮 */
-    .polish-btn {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 8px;
-        font-size: 0.875rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-    
-    .polish-btn:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-    }
-    
-    /* 结果展示 */
-    .result-box {
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 1.5rem;
-        font-family: 'Courier New', monospace;
-        line-height: 1.8;
-        max-height: 600px;
-        overflow-y: auto;
-    }
-    
-    /* 侧边栏 */
-    .sidebar-card {
-        background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
-        border-radius: 12px;
-        padding: 1rem;
-        margin-bottom: 1rem;
-    }
-    
-    /* 按钮样式优化 */
-    .stButton > button {
-        border-radius: 10px;
-        font-weight: 500;
-        padding: 0.5rem 1.5rem;
-        transition: all 0.3s ease;
-    }
-    
-    .stButton > button:hover {
-        transform: translateY(-2px);
-    }
-    
-    /* 输入框样式 */
-    .stTextInput > div > div > input,
-    .stTextArea > div > div > textarea {
-        border-radius: 10px;
-        border: 1px solid #e2e8f0;
-    }
-    
-    .stTextInput > div > div > input:focus,
-    .stTextArea > div > div > textarea:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-    
-    /* 选项卡 */
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 0;
-        background: #f1f5f9;
-        border-radius: 12px;
-        padding: 4px;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 8px;
-        padding: 0.5rem 1rem;
-        font-weight: 500;
-    }
-    
-    .stTabs [aria-selected="true"] {
-        background: white;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    
-    /* 提示信息 */
-    .tip-box {
-        background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
-        border-left: 4px solid #667eea;
-        border-radius: 0 12px 12px 0;
-        padding: 1rem 1.5rem;
-        margin: 1rem 0;
-    }
-    
-    .tip-title {
-        font-weight: 600;
-        color: #1e40af;
-        margin-bottom: 0.5rem;
-    }
-    
-    .tip-content {
-        color: #3730a3;
-        font-size: 0.9rem;
-    }
-    
-    /* 步骤指示器 */
-    .steps-container {
-        display: flex;
-        justify-content: center;
-        margin: 2rem 0;
-        gap: 1rem;
-    }
-    
-    .step-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .step-number {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 600;
-        font-size: 0.875rem;
-    }
-    
-    .step-active .step-number {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-    }
-    
-    .step-completed .step-number {
-        background: #10b981;
-        color: white;
-    }
-    
-    .step-pending .step-number {
-        background: #e2e8f0;
-        color: #64748b;
-    }
-    
-    .step-line {
-        width: 60px;
-        height: 2px;
-        background: #e2e8f0;
-    }
-    
-    .step-line.completed {
-        background: #10b981;
-    }
-</style>
-""", unsafe_allow_html=True)
-
 
 def init_session_state():
     """初始化会话状态"""
@@ -354,12 +52,12 @@ def init_session_state():
         "disclosure_data": {},
         "uploaded_content": "",
         "generated_patent": "",
-        "patent_sections": {},  # 存储各个章节的内容
-        "generation_progress": {},  # 生成进度
+        "patent_sections": {},
+        "generation_progress": {},
         "polished_sections": {},
         "processing_status": None,
         "step": 1,
-        "optimized_document": "",  # 优化后的完整文档
+        "optimized_document": "",
     }
     for key, value in defaults.items():
         if key not in st.session_state:
@@ -384,17 +82,14 @@ def parse_uploaded_file(uploaded_file) -> str:
                 return ""
             from io import BytesIO
 
-            # 读取文件内容
             file_content = uploaded_file.getvalue()
             doc = docx.Document(BytesIO(file_content))
 
-            # 提取段落文本
             text_parts = []
             for para in doc.paragraphs:
                 if para.text.strip():
                     text_parts.append(para.text.strip())
 
-            # 提取表格内容
             for table in doc.tables:
                 for row in table.rows:
                     row_text = " | ".join([cell.text.strip() for cell in row.cells if cell.text.strip()])
@@ -434,13 +129,8 @@ def clean_extracted_text(text: str) -> str:
     if not text:
         return ""
 
-    # 统一换行符
     text = text.replace("\r\n", "\n").replace("\r", "\n")
-
-    # 移除多余的空行（保留最多一个空行）
     text = re.sub(r"\n\s*\n\s*\n+", "\n\n", text)
-
-    # 清理特殊字符（但保留中文标点）
     text = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f-\x9f]", "", text)
 
     return text.strip()
@@ -483,8 +173,7 @@ async def extract_disclosure_fields_with_llm(text: str) -> Dict[str, str]:
   "figure_descriptions": "..."
 }"""
 
-    # 如果文本太长，进行截断（保留关键部分）
-    max_length = 12000  # DeepSeek 的上下文限制
+    max_length = 12000
     if len(text) > max_length:
         text = text[:max_length] + "\n...(内容过长，已截断)"
 
@@ -498,23 +187,19 @@ async def extract_disclosure_fields_with_llm(text: str) -> Dict[str, str]:
     try:
         response = await call_deepseek_api(prompt, system_prompt)
 
-        # 尝试解析 JSON 响应
         import json
 
-        # 清理可能的 markdown 代码块标记
         response = response.strip()
         if response.startswith("```"):
             response = re.sub(r"^```(?:json)?\s*", "", response)
             response = re.sub(r"\s*```$", "", response)
 
-        # 尝试提取 JSON 对象
         json_match = re.search(r"\{[\s\S]*\}", response)
         if json_match:
             response = json_match.group(0)
 
         parsed = json.loads(response)
 
-        # 确保所有必需字段都存在
         default_fields = {
             "title": "",
             "technical_field": "",
@@ -533,8 +218,6 @@ async def extract_disclosure_fields_with_llm(text: str) -> Dict[str, str]:
 
     except json.JSONDecodeError as e:
         st.error(f"LLM 返回的内容格式有误: {str(e)}")
-        st.info("尝试使用正则表达式提取...")
-        # 降级使用正则表达式方法
         return extract_disclosure_fields_fallback(text)
     except Exception as e:
         st.error(f"LLM 提取失败: {str(e)}")
@@ -556,7 +239,6 @@ def extract_disclosure_fields_fallback(text: str) -> Dict[str, str]:
         "figure_descriptions": "",
     }
 
-    # 定义关键词模式
     patterns = {
         "title": [r"发明名称[：:]\s*(.+?)(?:\n|$)", r"名称[：:]\s*(.+?)(?:\n|$)"],
         "technical_field": [
@@ -603,28 +285,27 @@ async def call_deepseek_api(prompt: str, system_prompt: str = None) -> str:
         from openai import OpenAI
         import streamlit as st
 
-        # 从环境变量或 Streamlit secrets 获取 API key
         api_key = st.secrets.get("DEEPSEEK_API_KEY", os.environ.get("DEEPSEEK_API_KEY"))
 
         client = OpenAI(
             api_key=api_key,
             base_url="https://api.deepseek.com/v1"
         )
-        
+
         messages = []
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
         messages.append({"role": "user", "content": prompt})
-        
+
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=messages,
             temperature=0.7,
             max_tokens=4096,
         )
-        
+
         return response.choices[0].message.content
-        
+
     except Exception as e:
         return f"API 调用失败: {str(e)}"
 
@@ -640,17 +321,15 @@ async def polish_content(content: str, field_name: str) -> str:
         "beneficial_effects": "请润色以下有益效果描述，使其更加具体、可量化：",
         "embodiments": "请润色以下实施例描述，使其更加详细、可操作：",
     }
-    
+
     system_prompt = """你是一位专业的专利代理人，擅长撰写高质量的专利申请文件。
 请根据要求润色内容，保持原意的同时提升专业性和规范性。
 只返回润色后的内容，不要添加任何解释或说明。"""
-    
+
     prompt = field_prompts.get(field_name, "请润色以下内容：") + f"\n\n{content}"
-    
+
     return await call_deepseek_api(prompt, system_prompt)
-# ============================================================
-# 专利生成模块 - 分板块生成
-# ============================================================
+
 
 async def generate_patent_section(
     section_name: str,
@@ -861,87 +540,48 @@ async def optimize_patent_document(sections: Dict[str, str]) -> str:
 
 def render_home_page():
     """渲染首页"""
-    st.markdown('<h1 class="hero-title">⚡ 专利智能工作室</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="hero-subtitle">AI 驱动的一站式专利文件生成平台 | Powered by DeepSeek</p>', unsafe_allow_html=True)
-    
-    # 功能卡片
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-        <div class="feature-card">
-            <div class="feature-icon">📤</div>
-            <div class="feature-title">智能上传</div>
-            <div class="feature-desc">支持 Word、TXT、PDF 等多种格式，自动识别和提取交底书内容</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div class="feature-card">
-            <div class="feature-icon">✨</div>
-            <div class="feature-title">AI 润色</div>
-            <div class="feature-desc">对每个章节进行智能润色，提升专利文件的专业性和规范性</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div class="feature-card">
-            <div class="feature-icon">📄</div>
-            <div class="feature-title">一键生成</div>
-            <div class="feature-desc">自动生成符合规范的完整专利申请文件，包括权利要求书</div>
-        </div>
-        """, unsafe_allow_html=True)
-    
+    st.title("⚡ 专利智能工作室")
+    st.markdown("**AI 驱动的一站式专利文件生成平台 | Powered by DeepSeek**")
+
     st.markdown("---")
-    
-    # 快速开始
-    st.markdown("### 🚀 快速开始")
-    
-    col1, col2 = st.columns(2)
-    
+
+    col1, col2, col3 = st.columns(3)
+
     with col1:
-        st.markdown("""
-        <div class="tip-box">
-            <div class="tip-title">💡 方式一：上传交底书</div>
-            <div class="tip-content">
-                上传已有的交底书文件（Word/TXT/PDF），系统将自动识别和提取内容
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
+        st.info("📤 **智能上传**\n\n支持 Word、TXT、PDF 等多种格式，自动识别和提取交底书内容")
+
+    with col2:
+        st.success("✨ **AI 润色**\n\n对每个章节进行智能润色，提升专利文件的专业性和规范性")
+
+    with col3:
+        st.warning("📄 **一键生成**\n\n自动生成符合规范的完整专利申请文件，包括权利要求书")
+
+    st.markdown("---")
+    st.markdown("### 🚀 快速开始")
+
+    col1, col2 = st.columns(2)
+
+    with col1:
         if st.button("📤 上传交底书", use_container_width=True, type="primary"):
             st.session_state.current_page = "upload"
             st.rerun()
-    
+
     with col2:
-        st.markdown("""
-        <div class="tip-box">
-            <div class="tip-title">💡 方式二：在线填写</div>
-            <div class="tip-content">
-                使用引导式表单逐步填写交底书内容，支持实时润色和预览
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        if st.button("📝 在线填写", use_container_width=True, type="primary"):
+        if st.button("📝 在线填写", use_container_width=True):
             st.session_state.current_page = "fill"
             st.rerun()
 
 
 def render_upload_page():
     """渲染上传页面"""
-    st.markdown("### 📤 上传交底书文件")
+    st.header("📤 上传交底书文件")
 
-    # 返回按钮
     if st.button("← 返回首页"):
         st.session_state.current_page = "home"
         st.rerun()
 
     st.markdown("---")
 
-    # 文件上传区域
     uploaded_file = st.file_uploader(
         "选择交底书文件",
         type=["txt", "doc", "docx", "pdf"],
@@ -955,13 +595,7 @@ def render_upload_page():
             if content:
                 st.success(f"✅ 文件解析成功！共 {len(content)} 个字符")
 
-                # 使用 LLM 智能提取字段
                 st.info("🤖 正在使用 AI 智能识别交底书内容...")
-                progress_bar = st.progress(0)
-                status_text = st.empty()
-
-                status_text.text("正在分析文档结构...")
-                progress_bar.progress(20)
 
                 with st.spinner("正在使用 DeepSeek AI 智能提取内容..."):
                     loop = asyncio.new_event_loop()
@@ -969,27 +603,16 @@ def render_upload_page():
                     extracted = loop.run_until_complete(extract_disclosure_fields_with_llm(content))
                     loop.close()
 
-                progress_bar.progress(100)
-                status_text.text("✅ AI 识别完成！")
                 st.session_state.disclosure_data = extracted
 
-                # 清除进度指示器
-                import time
-                time.sleep(0.5)
-                progress_bar.empty()
-                status_text.empty()
-
-                # 显示原文
                 with st.expander("📄 查看原文", expanded=False):
                     st.text_area("文件内容", content, height=300, disabled=True)
 
-                # 显示提取结果
                 st.markdown("### 📋 AI 识别结果")
                 st.success("以下内容由 AI 智能识别提取，您可以编辑和润色后生成专利文件")
-                
-                # 显示提取的字段
+
                 tab1, tab2 = st.tabs(["📝 基本信息", "📄 技术内容"])
-                
+
                 with tab1:
                     col1, col2 = st.columns(2)
                     with col1:
@@ -998,16 +621,15 @@ def render_upload_page():
                     with col2:
                         inventors = st.text_input("发明人", value=extracted.get("inventors", ""))
                         tech_field = st.text_input("技术领域", value=extracted.get("technical_field", ""))
-                    
+
                     st.session_state.disclosure_data.update({
                         "title": title,
                         "applicant_name": applicant,
                         "inventors": inventors,
                         "technical_field": tech_field,
                     })
-                
+
                 with tab2:
-                    # 背景技术
                     st.markdown("#### 背景技术")
                     col1, col2 = st.columns([5, 1])
                     with col1:
@@ -1018,7 +640,6 @@ def render_upload_page():
                             key="bg_text"
                         )
                     with col2:
-                        st.markdown("<br>", unsafe_allow_html=True)
                         if st.button("✨ 润色", key="polish_bg"):
                             with st.spinner("润色中..."):
                                 loop = asyncio.new_event_loop()
@@ -1027,10 +648,9 @@ def render_upload_page():
                                 loop.close()
                                 st.session_state.disclosure_data["background_description"] = polished
                                 st.rerun()
-                    
+
                     st.session_state.disclosure_data["background_description"] = bg
-                    
-                    # 技术问题
+
                     st.markdown("#### 要解决的技术问题")
                     col1, col2 = st.columns([5, 1])
                     with col1:
@@ -1041,7 +661,6 @@ def render_upload_page():
                             key="problems_text"
                         )
                     with col2:
-                        st.markdown("<br>", unsafe_allow_html=True)
                         if st.button("✨ 润色", key="polish_problems"):
                             with st.spinner("润色中..."):
                                 loop = asyncio.new_event_loop()
@@ -1050,10 +669,9 @@ def render_upload_page():
                                 loop.close()
                                 st.session_state.disclosure_data["technical_problems"] = polished
                                 st.rerun()
-                    
+
                     st.session_state.disclosure_data["technical_problems"] = problems
-                    
-                    # 技术方案
+
                     st.markdown("#### 技术方案")
                     col1, col2 = st.columns([5, 1])
                     with col1:
@@ -1064,7 +682,6 @@ def render_upload_page():
                             key="solution_text"
                         )
                     with col2:
-                        st.markdown("<br>", unsafe_allow_html=True)
                         if st.button("✨ 润色", key="polish_solution"):
                             with st.spinner("润色中..."):
                                 loop = asyncio.new_event_loop()
@@ -1073,10 +690,9 @@ def render_upload_page():
                                 loop.close()
                                 st.session_state.disclosure_data["technical_solution"] = polished
                                 st.rerun()
-                    
+
                     st.session_state.disclosure_data["technical_solution"] = solution
-                    
-                    # 有益效果
+
                     st.markdown("#### 有益效果")
                     col1, col2 = st.columns([5, 1])
                     with col1:
@@ -1087,7 +703,6 @@ def render_upload_page():
                             key="effects_text"
                         )
                     with col2:
-                        st.markdown("<br>", unsafe_allow_html=True)
                         if st.button("✨ 润色", key="polish_effects"):
                             with st.spinner("润色中..."):
                                 loop = asyncio.new_event_loop()
@@ -1096,10 +711,9 @@ def render_upload_page():
                                 loop.close()
                                 st.session_state.disclosure_data["beneficial_effects"] = polished
                                 st.rerun()
-                    
+
                     st.session_state.disclosure_data["beneficial_effects"] = effects
 
-                    # 具体实施例（新增）
                     st.markdown("#### 具体实施例")
                     col1, col2 = st.columns([5, 1])
                     with col1:
@@ -1111,7 +725,6 @@ def render_upload_page():
                             placeholder="描述具体实施方式..."
                         )
                     with col2:
-                        st.markdown("<br>", unsafe_allow_html=True)
                         if st.button("✨ 润色", key="polish_embodiments"):
                             with st.spinner("润色中..."):
                                 loop = asyncio.new_event_loop()
@@ -1123,7 +736,6 @@ def render_upload_page():
 
                     st.session_state.disclosure_data["embodiments"] = embodiments
 
-                    # 附图说明（新增）
                     st.markdown("#### 附图说明")
                     figures = st.text_area(
                         "附图说明",
@@ -1134,7 +746,6 @@ def render_upload_page():
                     )
                     st.session_state.disclosure_data["figure_descriptions"] = figures
 
-                # 生成按钮
                 st.markdown("---")
                 col1, col2, col3 = st.columns([1, 2, 1])
                 with col2:
@@ -1145,19 +756,17 @@ def render_upload_page():
 
 def render_fill_page():
     """渲染在线填写页面"""
-    st.markdown("### 📝 在线填写交底书")
-    
-    # 返回按钮
+    st.header("📝 在线填写交底书")
+
     if st.button("← 返回首页"):
         st.session_state.current_page = "home"
         st.rerun()
-    
+
     st.markdown("---")
-    
-    # 步骤指示器
+
     step = st.session_state.step
     steps = ["基本信息", "技术内容", "确认生成"]
-    
+
     cols = st.columns(len(steps) * 2 - 1)
     for i, step_name in enumerate(steps):
         with cols[i * 2]:
@@ -1170,55 +779,54 @@ def render_fill_page():
         if i < len(steps) - 1:
             with cols[i * 2 + 1]:
                 st.markdown("—")
-    
+
     st.markdown("---")
-    
+
     data = st.session_state.disclosure_data
-    
+
     if step == 1:
-        # 步骤1：基本信息
         st.markdown("#### 📌 基本信息")
-        
+
         col1, col2 = st.columns(2)
-        
+
         with col1:
             title = st.text_input(
                 "发明名称 *",
                 value=data.get("title", ""),
                 placeholder="例如：一种基于深度学习的智能推荐方法"
             )
-            
+
             patent_type = st.selectbox(
                 "专利类型 *",
                 options=["invention", "utility_model", "design"],
                 format_func=lambda x: {"invention": "发明专利", "utility_model": "实用新型", "design": "外观设计"}[x]
             )
-            
+
             technical_field = st.text_input(
                 "技术领域 *",
                 value=data.get("technical_field", ""),
                 placeholder="例如：人工智能、机器学习"
             )
-        
+
         with col2:
             applicant_name = st.text_input(
                 "申请人名称 *",
                 value=data.get("applicant_name", ""),
                 placeholder="公司名称或个人姓名"
             )
-            
+
             applicant_address = st.text_input(
                 "申请人地址",
                 value=data.get("applicant_address", ""),
                 placeholder="详细地址"
             )
-            
+
             inventors = st.text_input(
                 "发明人 *",
                 value=data.get("inventors", ""),
                 placeholder="多个发明人用逗号分隔"
             )
-        
+
         st.session_state.disclosure_data.update({
             "title": title,
             "patent_type": patent_type,
@@ -1227,24 +835,21 @@ def render_fill_page():
             "applicant_address": applicant_address,
             "inventors": inventors,
         })
-        
-        # 验证
+
         is_valid = all([title, technical_field, applicant_name, inventors])
-        
+
         col1, col2, col3 = st.columns([1, 1, 1])
         with col3:
             if st.button("下一步 →", type="primary", use_container_width=True, disabled=not is_valid):
                 st.session_state.step = 2
                 st.rerun()
-        
+
         if not is_valid:
             st.warning("请填写所有必填项（标记 * 的字段）")
-    
+
     elif step == 2:
-        # 步骤2：技术内容
         st.markdown("#### 📄 技术内容")
-        
-        # 背景技术
+
         st.markdown("##### 背景技术 *")
         col1, col2 = st.columns([6, 1])
         with col1:
@@ -1255,7 +860,6 @@ def render_fill_page():
                 placeholder="请详细描述当前技术领域的发展状况和存在的问题..."
             )
         with col2:
-            st.markdown("<br><br>", unsafe_allow_html=True)
             if st.button("✨ 润色", key="p_bg"):
                 if background:
                     with st.spinner("润色中..."):
@@ -1266,8 +870,7 @@ def render_fill_page():
                         st.session_state.disclosure_data["background_description"] = polished
                         st.rerun()
         st.session_state.disclosure_data["background_description"] = background
-        
-        # 技术问题
+
         st.markdown("##### 要解决的技术问题 *")
         col1, col2 = st.columns([6, 1])
         with col1:
@@ -1278,7 +881,6 @@ def render_fill_page():
                 placeholder="例如：如何提高系统的处理速度和准确率..."
             )
         with col2:
-            st.markdown("<br><br>", unsafe_allow_html=True)
             if st.button("✨ 润色", key="p_prob"):
                 if problems:
                     with st.spinner("润色中..."):
@@ -1289,8 +891,7 @@ def render_fill_page():
                         st.session_state.disclosure_data["technical_problems"] = polished
                         st.rerun()
         st.session_state.disclosure_data["technical_problems"] = problems
-        
-        # 技术方案
+
         st.markdown("##### 技术方案 *")
         col1, col2 = st.columns([6, 1])
         with col1:
@@ -1301,7 +902,6 @@ def render_fill_page():
                 placeholder="请详细描述您的技术方案，包括主要步骤和实现方式..."
             )
         with col2:
-            st.markdown("<br><br>", unsafe_allow_html=True)
             if st.button("✨ 润色", key="p_sol"):
                 if solution:
                     with st.spinner("润色中..."):
@@ -1312,8 +912,7 @@ def render_fill_page():
                         st.session_state.disclosure_data["technical_solution"] = polished
                         st.rerun()
         st.session_state.disclosure_data["technical_solution"] = solution
-        
-        # 有益效果
+
         st.markdown("##### 有益效果 *")
         col1, col2 = st.columns([6, 1])
         with col1:
@@ -1324,7 +923,6 @@ def render_fill_page():
                 placeholder="例如：提高效率30%、降低成本50%..."
             )
         with col2:
-            st.markdown("<br><br>", unsafe_allow_html=True)
             if st.button("✨ 润色", key="p_eff"):
                 if effects:
                     with st.spinner("润色中..."):
@@ -1335,8 +933,7 @@ def render_fill_page():
                         st.session_state.disclosure_data["beneficial_effects"] = polished
                         st.rerun()
         st.session_state.disclosure_data["beneficial_effects"] = effects
-        
-        # 实施例（可选）
+
         st.markdown("##### 具体实施例")
         embodiments = st.text_area(
             "提供具体的实施例（可选）",
@@ -1345,8 +942,7 @@ def render_fill_page():
             placeholder="描述一个或多个具体的实施例..."
         )
         st.session_state.disclosure_data["embodiments"] = embodiments
-        
-        # 附图说明（可选）
+
         st.markdown("##### 附图说明")
         figures = st.text_area(
             "附图说明（可选）",
@@ -1355,10 +951,9 @@ def render_fill_page():
             placeholder="图1为系统架构图；图2为流程图..."
         )
         st.session_state.disclosure_data["figure_descriptions"] = figures
-        
-        # 验证
+
         is_valid = all([background, problems, solution, effects])
-        
+
         col1, col2, col3 = st.columns([1, 1, 1])
         with col1:
             if st.button("← 上一步", use_container_width=True):
@@ -1368,17 +963,15 @@ def render_fill_page():
             if st.button("下一步 →", type="primary", use_container_width=True, disabled=not is_valid):
                 st.session_state.step = 3
                 st.rerun()
-        
+
         if not is_valid:
             st.warning("请填写所有必填项")
-    
+
     elif step == 3:
-        # 步骤3：确认生成
         st.markdown("#### ✅ 确认信息")
-        
+
         data = st.session_state.disclosure_data
 
-        # 获取专利类型中文名
         patent_type_map = {'invention': '发明专利', 'utility_model': '实用新型', 'design': '外观设计'}
         patent_type_name = patent_type_map.get(data.get('patent_type', ''), '')
 
@@ -1408,7 +1001,7 @@ def render_fill_page():
             **有益效果**:
             {data.get('beneficial_effects', '')}
             """)
-        
+
         col1, col2, col3 = st.columns([1, 2, 1])
         with col1:
             if st.button("← 返回修改", use_container_width=True):
@@ -1422,9 +1015,8 @@ def render_fill_page():
 
 def render_generate_page():
     """渲染生成页面 - 分板块生成专利"""
-    st.markdown("### 📄 生成专利申请文件")
+    st.header("📄 生成专利申请文件")
 
-    # 返回按钮
     col1, col2 = st.columns([1, 5])
     with col1:
         if st.button("← 返回"):
@@ -1439,7 +1031,6 @@ def render_generate_page():
 
     data = st.session_state.disclosure_data
 
-    # 检查数据完整性
     required_fields = ["title", "technical_field", "background_description", "technical_problems", "technical_solution", "beneficial_effects"]
     missing_fields = [f for f in required_fields if not data.get(f)]
 
@@ -1448,7 +1039,6 @@ def render_generate_page():
         st.warning("请返回完善交底书信息")
         return
 
-    # 定义专利章节
     sections_config = {
         "title": {"name": "发明名称", "icon": "📌"},
         "technical_field": {"name": "技术领域", "icon": "🎯"},
@@ -1460,14 +1050,12 @@ def render_generate_page():
         "abstract": {"name": "摘要", "icon": "📝"},
     }
 
-    # 如果还没有开始生成
     if not st.session_state.patent_sections:
         st.info("👇 点击下方按钮开始分板块生成专利文件")
 
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
             if st.button("🚀 开始生成专利文件", type="primary", use_container_width=True):
-                # 开始生成所有章节
                 st.session_state.generation_progress = {}
                 st.session_state.patent_sections = {}
 
@@ -1505,28 +1093,21 @@ def render_generate_page():
                 st.success("✅ 所有章节生成完成！")
                 st.rerun()
 
-    # 已生成完成，显示章节列表
     else:
         st.success("✅ 专利文件章节已生成完成")
 
-        # 章节概览
         st.markdown("### 📋 章节概览")
 
         for section_key, section_info in sections_config.items():
             content = st.session_state.patent_sections.get(section_key, "")
 
-            # 判断状态
             if "生成失败" in content:
                 status = "❌"
-                status_color = "red"
             elif content:
                 status = "✅"
-                status_color = "green"
             else:
                 status = "⏳"
-                status_color = "gray"
 
-            # 使用 expander 显示每个章节
             with st.expander(f"{status} {section_info['icon']} {section_info['name']}", expanded=False):
                 if content and "生成失败" not in content:
                     st.text_area(
@@ -1536,7 +1117,6 @@ def render_generate_page():
                         key=f"section_{section_key}"
                     )
 
-                    # 单独重新生成按钮
                     if st.button(f"🔄 重新生成{section_info['name']}", key=f"regen_{section_key}"):
                         loop = asyncio.new_event_loop()
                         asyncio.set_event_loop(loop)
@@ -1558,7 +1138,6 @@ def render_generate_page():
                         st.session_state.patent_sections[section_key] = result
                         st.rerun()
 
-        # 总览和优化按钮
         st.markdown("---")
         col1, col2, col3 = st.columns([1, 2, 1])
         with col2:
@@ -1574,7 +1153,6 @@ def render_generate_page():
                 st.success("✅ 优化完成！")
                 st.rerun()
 
-        # 显示优化后的文档
         if st.session_state.optimized_document:
             st.markdown("---")
             st.markdown("### 🎯 优化后的专利文件")
@@ -1582,9 +1160,7 @@ def render_generate_page():
             tab1, tab2 = st.tabs(["📄 优化结果", "📥 下载"])
 
             with tab1:
-                st.markdown('<div class="result-box">', unsafe_allow_html=True)
                 st.text(st.session_state.optimized_document)
-                st.markdown('</div>', unsafe_allow_html=True)
 
             with tab2:
                 filename = f"专利申请文件_{data.get('title', '未命名')}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
@@ -1616,7 +1192,6 @@ def render_generate_page():
                         use_container_width=True,
                     )
 
-        # 操作按钮
         st.markdown("---")
         col1, col2, col3 = st.columns([1, 1, 1])
 
@@ -1649,64 +1224,59 @@ def render_sidebar():
     with st.sidebar:
         st.markdown("### ⚡ 专利智能工作室")
         st.markdown("---")
-        
-        # 导航菜单
+
         st.markdown("#### 📋 导航")
-        
+
         if st.button("🏠 首页", use_container_width=True):
             st.session_state.current_page = "home"
             st.rerun()
-        
+
         if st.button("📤 上传交底书", use_container_width=True):
             st.session_state.current_page = "upload"
             st.rerun()
-        
+
         if st.button("📝 在线填写", use_container_width=True):
             st.session_state.current_page = "fill"
             st.session_state.step = 1
             st.rerun()
-        
+
         st.markdown("---")
-        
-        # 模型状态
+
         st.markdown("#### 🤖 AI 模型")
         st.markdown("""
-        <div class="sidebar-card">
-            <span class="status-badge status-success">● 在线</span>
-            <br><br>
-            <strong>DeepSeek Chat</strong>
-            <br>
-            <small style="color: #64748b;">高性能中文大模型</small>
-        </div>
+        <span style='color: green;'>● </span> **在线**
+
+        **DeepSeek Chat**
+
+        <small style='color: gray;'>高性能中文大模型</small>
         """, unsafe_allow_html=True)
-        
+
         st.markdown("---")
-        
-        # 使用说明
+
         with st.expander("❓ 使用说明"):
             st.markdown("""
             **功能说明：**
-            
+
             1. **上传交底书**
                - 支持 Word、TXT、PDF
                - 自动识别和提取内容
-            
+
             2. **在线填写**
                - 分步骤引导填写
                - 实时保存进度
-            
+
             3. **AI 润色**
                - 点击 ✨ 按钮润色内容
                - 提升专业性和规范性
-            
+
             4. **生成专利文件**
                - 自动生成完整文件
                - 包含权利要求书
             """)
-        
+
         st.markdown("---")
         st.markdown(
-            '<p style="text-align: center; color: #94a3b8; font-size: 0.75rem;">'
+            '<p style="text-align: center; color: gray; font-size: 0.75rem;">'
             'Powered by DeepSeek AI<br>v2.0.0'
             '</p>',
             unsafe_allow_html=True
@@ -1717,10 +1287,9 @@ def main():
     """主函数"""
     init_session_state()
     render_sidebar()
-    
-    # 根据当前页面渲染内容
+
     page = st.session_state.current_page
-    
+
     if page == "home":
         render_home_page()
     elif page == "upload":
